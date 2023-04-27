@@ -1,11 +1,11 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
-import 'package:web_1/centerlist.dart';
+import 'package:web_1/screens/centerlist.dart';
 import 'package:web_1/constraints.dart';
-import 'package:web_1/plastictypelist.dart';
+import 'package:web_1/widgets/plastictypelist.dart';
 
-import 'package:web_1/statuscard.dart';
-import 'package:web_1/topbar.dart';
+import 'package:web_1/widgets/statuscard.dart';
+import 'package:web_1/widgets/topbar.dart';
 
 class dashboard extends StatefulWidget {
   const dashboard({Key? key}) : super(key: key);

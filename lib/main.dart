@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:web_1/constraints.dart';
 import 'package:web_1/homepage.dart';
-import 'package:web_1/plastictypelist.dart';
+import 'package:web_1/widgets/plastictypelist.dart';
 import 'package:web_1/screens/dashboard.dart';
 
 

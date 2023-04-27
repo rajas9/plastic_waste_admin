@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
-import 'package:web_1/navdrawer.dart';
+
 import 'package:web_1/screens/dashboard.dart';
 
 class Homepage extends StatelessWidget {
@@ -17,7 +17,7 @@ class Homepage extends StatelessWidget {
                   backgroundColor: Colors.red,
                   elevation: 2,),
         child: Text("here"),
-      onPressed: () {navdrawer();},
+      onPressed: () {},
       ),
     );
   }
