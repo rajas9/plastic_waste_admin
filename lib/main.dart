@@ -12,10 +12,10 @@ void main() async {
   WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
     options: const FirebaseOptions(
-      apiKey: "AIzaSyCBwhyNzd2yhIBEwL4LZuuFu0KwlF55xKg",
-      appId: "1:368856123001:web:8e8af98597c43a29a036a8", 
-      messagingSenderId: "368856123001", 
-      projectId: "web1-78c64")
+      apiKey: "AIzaSyAMrd18G8YgGpK2wfOe3ZGVwtMsgbQNoEU",
+      appId: "1:608732425209:web:cae3dafca01ba234ddeb28",
+      messagingSenderId: "608732425209", 
+      projectId: "plastic-waste-541ca")
   );
   runApp(const MyApp());
 }

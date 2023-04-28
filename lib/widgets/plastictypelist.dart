@@ -4,7 +4,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/src/foundation/key.dart';
 import 'package:flutter/src/widgets/framework.dart';
 
-final List<String> entries = <String>['req104', 'req105', 'req106','p','eee'];
 
 class ptlist extends StatefulWidget {
   const ptlist({Key? key}) : super(key: key);
@@ -23,7 +22,7 @@ class _ptlistState extends State<ptlist> {
           
           child: StreamBuilder<Object>(
             stream: FirebaseFirestore.instance
-                      .collection("demodata2")
+                      .collection("pwdata")
                       .snapshots(),
             builder: (BuildContext context, AsyncSnapshot snapshot) {
               List<dynamic> items = snapshot.data?.docs;

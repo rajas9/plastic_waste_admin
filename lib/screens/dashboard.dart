@@ -1,5 +1,9 @@
+
+
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
+import 'package:syncfusion_flutter_charts/charts.dart';
+
 import 'package:web_1/screens/centerlist.dart';
 import 'package:web_1/constraints.dart';
 import 'package:web_1/widgets/plastictypelist.dart';
@@ -17,6 +21,9 @@ class dashboard extends StatefulWidget {
 class _dashboardState extends State<dashboard> {
   List<dynamic>? items = [];
   List<dynamic>? items2 = [];
+  List<Map>? piemap=[];
+  List<String> pname=['PETE','HDPE','PVC','LDPE','PP','PS','OTHER'];
+  List<dynamic> pperc=[0,0,0,0,0,0,0];
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +38,7 @@ class _dashboardState extends State<dashboard> {
             children: [
               StreamBuilder<Object>(
                   stream: FirebaseFirestore.instance
-                      .collection("demodata2")
+                      .collection("pwdata")
                       .snapshots(),
                   builder: (BuildContext context,
                       AsyncSnapshot<dynamic> snapshot) {
@@ -58,7 +65,7 @@ class _dashboardState extends State<dashboard> {
                         
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          StatusCard(title: "quantity", value: total[0]),
+                          StatusCard(title: "Quantity", value: total[0]),
                           const SizedBox(
                             width: 20,
                           ),
@@ -70,7 +77,7 @@ class _dashboardState extends State<dashboard> {
                             width: 20,
                           ),
                           const StatusCard(
-                            title: "center",
+                            title: "Center",
                             value: 5,
                           ),
                         ],
@@ -90,9 +97,9 @@ class _dashboardState extends State<dashboard> {
                   spreadRadius: 0,
                   offset: Offset(0, -2))
             ], borderRadius: BorderRadius.circular(16), color: Colors.white),
-            child: StreamBuilder<Object>(
+            child: StreamBuilder(
                 stream: FirebaseFirestore.instance
-                    .collection("demodata2")
+                    .collection("pwdata")
                     .snapshots(),
                 builder: (BuildContext context, AsyncSnapshot snapshot) {
                   if (!snapshot.hasData || snapshot.data == null) {
@@ -106,13 +113,54 @@ class _dashboardState extends State<dashboard> {
 
                     items2 = snapshot.data?.docs;
                     List<int> ptype = [0, 0, 0, 0, 0, 0, 0];
-                    var j = 0;
-
+                    double j = 0;
+                    //print(items2![0]["p_type"]);
                     for (var i = 0; i < items2!.length; i++) {
-                      j = int.parse(items2![i]["p_type"]);
-                      ptype[j] = ptype[j] + 1;
+                      if(items2![i]["p_type"]=='PETE'){
+                        ptype[0] = ptype[0] + 1;
+                      }else if(items2![i]["p_type"]=='HDPE'){
+                        ptype[1] = ptype[1] + 1;
+
+                      }
+                      else if(items2![i]["p_type"]=='PVC'){
+                        ptype[2] = ptype[2] + 1;
+
+                      }
+                      else if(items2![i]["p_type"]=='LDPE'){
+                        ptype[3] = ptype[3] + 1;
+
+                      }
+                      else if(items2![i]["p_type"]=='PP'){
+                        ptype[4] = ptype[4] + 1;
+
+                      }
+                      else if(items2![i]["p_type"]=='PS'){
+                        ptype[5] = ptype[5] + 1;
+
+                      }
+                      else{
+                        ptype[6] = ptype[6] + 1;
+                      }
                     }
 
+                    //calculating percentage
+                    for (var i = 0; i < 7; i++) {
+                      j=(ptype[i]/7)*100;
+                      pperc[i]=double.parse((j).toStringAsFixed(2));
+                    }
+
+                    //adding to map
+                    for (var i = 0; i < 7; i++) {
+                      piemap!.add(
+                        {
+                          "ptype":pname[i],
+                          "percentage":pperc[i]
+                        }
+                      );
+                    }
+
+                    return _buildDefaultPieChart(piemap!);
+                    /*
                     return ListView.builder(
                       
                         itemCount: 7,
@@ -128,7 +176,7 @@ class _dashboardState extends State<dashboard> {
                               ),
                               title: Text("Plastic Type ${index + 1}"));
                         });
-                  }
+                  */}
                 }),
           ),
           const SizedBox(height: 20,),
@@ -136,7 +184,7 @@ class _dashboardState extends State<dashboard> {
           (
             onTap: () {
                     Navigator.push(context, 
-                              new MaterialPageRoute(
+                               MaterialPageRoute(
                               builder: (context)=> new centerlist(),));
                   },
             child: Container(
@@ -156,3 +204,47 @@ class _dashboardState extends State<dashboard> {
     ));
   }
 }
+
+
+SfCircularChart _buildDefaultPieChart(List<Map> value) {
+    return SfCircularChart(
+      title: ChartTitle(text:  'Plastic waste by its types'),
+      legend: Legend(isVisible: true),
+      series: _getDefaultPieSeries(value),
+    );
+  }
+
+  /// Returns the pie series.
+  List<PieSeries<ChartSampleData, String>> _getDefaultPieSeries(List<Map> value) {
+    return <PieSeries<ChartSampleData, String>>[
+      PieSeries<ChartSampleData, String>(
+          explode: true,
+          explodeIndex: 0,
+          explodeOffset: '10%',
+          dataSource: [
+           
+            ChartSampleData(value[0]['ptype'],value[0]['percentage'],"${value[0]['ptype']}\n${value[0]['percentage']}"),
+            ChartSampleData(value[1]['ptype'],value[1]['percentage'],"${value[1]['ptype']}\n${value[1]['percentage']}"),
+            ChartSampleData(value[2]['ptype'],value[2]['percentage'],"${value[2]['ptype']}\n${value[2]['percentage']}"),
+            ChartSampleData(value[3]['ptype'],value[3]['percentage'],"${value[3]['ptype']}\n${value[3]['percentage']}"),
+            ChartSampleData(value[4]['ptype'],value[4]['percentage'],"${value[4]['ptype']}\n${value[4]['percentage']}"),
+            ChartSampleData(value[5]['ptype'],value[5]['percentage'],"${value[5]['ptype']}\n${value[5]['percentage']}"),
+            ChartSampleData(value[6]['ptype'],value[6]['percentage'],"${value[6]['ptype']}\n${value[6]['percentage']}"),
+          ],
+          xValueMapper: (ChartSampleData data, _) => data.x as String,
+          yValueMapper: (ChartSampleData data, _) => data.y,
+          dataLabelMapper: (ChartSampleData data, _) => data.text,
+          startAngle: 90,
+          endAngle: 90,
+          dataLabelSettings: const DataLabelSettings(isVisible: true)),
+    ];
+  }
+  
+  class ChartSampleData {
+        ChartSampleData(this.x, this.y, this.text);
+        final String x;
+        final double y;
+        final String text;
+    }
+
+  
