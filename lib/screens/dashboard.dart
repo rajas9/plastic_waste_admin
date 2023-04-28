@@ -19,7 +19,7 @@ class dashboard extends StatefulWidget {
 }
 
 class _dashboardState extends State<dashboard> {
-  List<dynamic>? items = [];
+  //List<dynamic>? items = [];
   List<dynamic>? items2 = [];
   List<Map>? piemap=[];
   List<String> pname=['PETE','HDPE','PVC','LDPE','PP','PS','OTHER'];
@@ -51,6 +51,8 @@ class _dashboardState extends State<dashboard> {
                     } else {
                       // Access data
 
+                      /*ist<Map<String,dynamic>> items= snapshot.data.docs as List<Map<String,dynamic>>;
+
                       items = snapshot.data?.docs;
                       List<int> total = [0, 0];
                       var n = items?.length;
@@ -59,19 +61,19 @@ class _dashboardState extends State<dashboard> {
                         total[0] =
                             total[0] + int.parse(items![i]["quantity"]);
                         total[1] = total[1] + int.parse(items![i]["reward"]);
-                      }
+                      }*/
 
                       return Row(
                         
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          StatusCard(title: "Quantity", value: total[0]),
+                          StatusCard(title: "Quantity", value:55), //total[0]),
                           const SizedBox(
                             width: 20,
                           ),
                           StatusCard(
                             title: "Reward",
-                            value: total[1],
+                            value: 38//total[1],
                           ),
                           const SizedBox(
                             width: 20,
