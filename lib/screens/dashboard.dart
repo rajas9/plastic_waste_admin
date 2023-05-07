@@ -147,7 +147,7 @@ class _dashboardState extends State<dashboard> {
 
                     //calculating percentage
                     for (var i = 0; i < 7; i++) {
-                      j=(ptype[i]/7)*100;
+                      j=(ptype[i]/items2!.length)*100;
                       pperc[i]=double.parse((j).toStringAsFixed(2));
                     }
 
