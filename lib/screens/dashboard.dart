@@ -19,7 +19,7 @@ class dashboard extends StatefulWidget {
 }
 
 class _dashboardState extends State<dashboard> {
-  //List<dynamic>? items = [];
+  List<dynamic>? items = [];
   List<dynamic>? items2 = [];
   List<Map>? piemap=[];
   List<String> pname=['PETE','HDPE','PVC','LDPE','PP','PS','OTHER'];
@@ -51,29 +51,29 @@ class _dashboardState extends State<dashboard> {
                     } else {
                       // Access data
 
-                      /*ist<Map<String,dynamic>> items= snapshot.data.docs as List<Map<String,dynamic>>;
+                      /*ist<Map<String,dynamic>> items= snapshot.data.docs as List<Map<String,dynamic>>;*/
 
                       items = snapshot.data?.docs;
-                      List<int> total = [0, 0];
+                      List<double> total = [0, 0];
                       var n = items?.length;
 
                       for (var i = 0; i < n!; i++) {
                         total[0] =
-                            total[0] + int.parse(items![i]["quantity"]);
-                        total[1] = total[1] + int.parse(items![i]["reward"]);
-                      }*/
+                            total[0] + double.parse(items![i]["quantity"]);
+                        total[1] = total[1] + double.parse(items![i]["reward"]);
+                      }
 
                       return Row(
                         
                         crossAxisAlignment: CrossAxisAlignment.center,
                         children: [
-                          StatusCard(title: "Quantity", value:55), //total[0]),
+                          StatusCard(title: "Quantity", value:total[0].round()), //total[0]),
                           const SizedBox(
                             width: 20,
                           ),
                           StatusCard(
                             title: "Reward",
-                            value: 38//total[1],
+                            value: total[1].round(),
                           ),
                           const SizedBox(
                             width: 20,
