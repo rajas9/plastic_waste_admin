@@ -1,8 +1,10 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
+import 'package:web_1/authpage.dart';
 import 'package:web_1/constraints.dart';
-import 'package:web_1/homepage.dart';
+import 'package:web_1/screens/homepage.dart';
+import 'package:web_1/screens/login.dart';
 import 'package:web_1/widgets/plastictypelist.dart';
 import 'package:web_1/screens/dashboard.dart';
 
@@ -33,7 +35,7 @@ class MyApp extends StatelessWidget {
           primaryColor: primary,
           textTheme: TextTheme().apply(bodyColor: textColor),
           backgroundColor: Colors.yellow),
-      home: dashboard(),
+      home: AuthPage(),
       debugShowCheckedModeBanner: false,
       
     );

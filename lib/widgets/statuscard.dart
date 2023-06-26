@@ -37,7 +37,7 @@ class _StatusCardState extends State<StatusCard> {
         
         // height: 200,
         decoration: BoxDecoration(
-            boxShadow: [
+            boxShadow: const [
               BoxShadow(
                   color: Color.fromRGBO(137, 181, 162, 0.56),
                   blurRadius: 16,
